@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+        <commentGenerator type="com.zxj.blog.mybatis.MyCommentGenerator">
+            <property name="suppressAllComments" value="false"></property>
+            <property name="suppressDate" value="true"></property>
+            <property name="javaFileEncoding" value="UTF-8"/>
+        </commentGenerator>
+
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/blog"
+                        userId="root"
+                        password="123456">
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+        <!--生成模型的包名和位置-->
+        <javaModelGenerator targetPackage="com.zxj.blog.entity" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"></property>
+            <property name="trimStrings" value="true"></property>
+        </javaModelGenerator>
+        <!--生成映射文件的包名和位置-->
+        <sqlMapGenerator targetPackage="mappers" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true"></property>
+        </sqlMapGenerator>
+        <!--生成dao接口的位置-->
+        <javaClientGenerator targetPackage="com.zxj.blog.dao" targetProject="src/main/java" type="XMLMAPPER">
+            <property name="enableSubPackages" value="true"/>
+            <property name="" value=""></property>
+        </javaClientGenerator>
+
+        <!-- sql占位符，表示所有的表 -->
+        <table  tableName="t_user" domainObjectName="User">
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey column="id" sqlStatement="Mysql" identity="true" />
+            <columnRenamingRule searchString="_" replaceString=""/>
+        </table>
+    </context>
+</generatorConfiguration>
