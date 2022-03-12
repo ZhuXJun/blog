@@ -1,5 +1,6 @@
 package com.zxj.blog.controller;
 
+import com.zxj.blog.Token;
 import com.zxj.blog.dto.ResultDto;
 import com.zxj.blog.entity.User;
 import com.zxj.blog.service.BlogUserService;
@@ -16,6 +17,7 @@ public class BlogUserController {
     private BlogUserService blogUserService;
 
     @GetMapping("/getSystemUser")
+    @Token
     public ResultDto<List<User>> getSystemUser(){
         return ResultDto.succ(blogUserService.getSystemUser());
     }

@@ -18,4 +18,6 @@ public interface UserMapper {
     int updateByPrimaryKey(User record);
 
     Integer insertAndReturnId(User user);
+
+    User selectByUserName(String userName);
 }

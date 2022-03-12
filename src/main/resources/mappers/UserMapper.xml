@@ -78,4 +78,11 @@
           #{nickname,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER},
             now(), #{username,jdbcType=VARCHAR})
   </insert>
+  <select id="selectByUserName" parameterType="string" resultType="com.zxj.blog.entity.User">
+    select * from blog.t_user
+    <where>
+        username=#{username,jdbcType=VARCHAR}
+    </where>
+  </select>
+
 </mapper>
