@@ -19,7 +19,7 @@ public class BlogUserController {
 
     @GetMapping("/getSystemUser")
     // @Token
-    @SaveLog
+    // @SaveLog
     public ResultDto<List<User>> getSystemUser(){
         return ResultDto.succ(blogUserService.getSystemUser());
     }

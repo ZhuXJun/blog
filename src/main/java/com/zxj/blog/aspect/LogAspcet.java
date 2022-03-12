@@ -8,7 +8,10 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
 
 @Component
@@ -22,8 +25,16 @@ public class LogAspcet {
     }
 
     @Around("pointCut()")
-    public void doSaveLog(ProceedingJoinPoint point) {
-        log.info("切入点：{}", point);
+    public void doAspect(ProceedingJoinPoint point) {
+        log.info("------------------------------------------------------------------");
+        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        HttpServletRequest request = attributes.getRequest();
+        //获取URL、IP
+        String url = request.getRequestURL().toString();
+        String ip = request.getRemoteAddr();
+        //获取请求方法
+        log.info("url=========>: {}",url);
+        log.info("ip=========>: {}",ip);
         //获取被代理方法参数
         Object[] args = point.getArgs();
         //获取被代理对象
@@ -35,14 +46,14 @@ public class LogAspcet {
             log.info("methodSignature.getName()： {}", methodSignature.getName());
             log.info("methodSignature.getParameterTypes()： {}", methodSignature.getParameterTypes());
             Method method = target.getClass().getMethod(methodSignature.getName(),methodSignature.getParameterTypes());
-            SaveLog saveLog = method.getAnnotation(SaveLog.class);
-            if (saveLog == null){
-                saveLog = target.getClass().getAnnotation(SaveLog.class);
-            }
-            if (saveLog != null){
-
-            }
-        } catch (NoSuchMethodException e) {
+            // SaveLog saveLog = method.getAnnotation(SaveLog.class);
+            // if (saveLog == null){
+            //     saveLog = target.getClass().getAnnotation(SaveLog.class);
+            // }
+            // if (saveLog != null){
+            //
+            // }
+        } catch (Exception e) {
             log.info("切入点报错：{} ", e);
         }
     }
