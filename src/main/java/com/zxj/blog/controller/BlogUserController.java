@@ -17,12 +17,13 @@ public class BlogUserController {
     private BlogUserService blogUserService;
 
     @GetMapping("/getSystemUser")
-    // @Token
+    @Token
     public ResultDto<List<User>> getSystemUser(){
         return ResultDto.succ(blogUserService.getSystemUser());
     }
 
     @PostMapping("/addSystemUser")
+    @Token
     public ResultDto<Integer> addSystemUser(@RequestBody User user){
         return ResultDto.succ(blogUserService.addSystemUser(user));
     }
@@ -34,6 +35,7 @@ public class BlogUserController {
      * @GETMapping:查
      */
     @PostMapping("/addUser")
+    @Token
     public ResultDto<Boolean> addUser(@RequestBody User user){
         if (blogUserService.addUser(user)){
             return ResultDto.succ(true);
