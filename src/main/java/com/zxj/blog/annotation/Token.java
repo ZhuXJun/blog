@@ -1,4 +1,4 @@
-package com.zxj.blog;
+package com.zxj.blog.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
