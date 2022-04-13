@@ -19,3 +19,6 @@ mybatis:
 logging:
   level:
     com.zxj.blog: debug
+  pattern:
+    console: "%d - %msg%n"
+    #    console: "%d{yyyy-MM-dd HH:mm:ss,SSS} [%t] [%c]-[%p] ============> :%msg%n"

@@ -1,27 +1,35 @@
 package com.zxj.blog.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 @EnableWebSecurity
+@Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable()
+                .authorizeRequests()
+                //”/“, “/home” 允许所有人访问，”/login” 作为登录入口，也被允许访问，而剩下的 “/hello” 则需要登陆后才可以访问。
+                    .antMatchers("/","/home").permitAll()
+                    .anyRequest().authenticated()
+                    .and()
+                .formLogin()
+                    .loginPage("/login").permitAll()
+                    .and()
+                .logout()
+                    .permitAll();
+    }
 
     @Autowired
-    private CustomerUserDetails customerUserDetails;
-
-    @Bean
-    public PasswordEncoder passwordEncoder(){
-        return new  BlogPasswordEncoder();
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth
+            .inMemoryAuthentication()
+                .withUser("admin").password("admin").roles("USER");
     }
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(customerUserDetails).passwordEncoder(passwordEncoder());
-    }
 }
