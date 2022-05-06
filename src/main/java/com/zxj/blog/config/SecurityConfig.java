@@ -1,5 +1,6 @@
 package com.zxj.blog.config;
 
+import com.zxj.blog.filter.BodyReaderFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -22,7 +23,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .loginPage("/login").permitAll()
                     .and()
                 .logout()
-                    .permitAll();
+                    .permitAll()
+                .and().addFilter(new BodyReaderFilter());
     }
 
     @Autowired
