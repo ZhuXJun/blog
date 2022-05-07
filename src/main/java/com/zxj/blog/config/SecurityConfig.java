@@ -23,8 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .loginPage("/login").permitAll()
                     .and()
                 .logout()
-                    .permitAll()
-                .and().addFilter(new BodyReaderFilter());
+                    .permitAll();
     }
 
     @Autowired
