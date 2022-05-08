@@ -1,6 +1,7 @@
 package com.zxj.blog.interceptor;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.zxj.blog.annotation.Token;
 import com.zxj.blog.entity.User;
 import com.zxj.blog.exception.BaseException;
@@ -43,7 +44,7 @@ public class AuthInterceptor implements HandlerInterceptor {
             queryString = URLDecoder.decode(queryString, StandardCharsets.UTF_8.name());
             uri = uri + "?" + queryString;
         }
-        String body = StreamUtils.copyToString(request.getInputStream(), StandardCharsets.UTF_8);
+        String body = JSONObject.toJSONString(request.getInputStream());
         log.info("接收到请求：" + uri + "，body= >【" + body + "】");
         Method method = ((HandlerMethod) handler).getMethod();
         Token tokenAuth = method.getAnnotation(Token.class);
