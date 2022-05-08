@@ -48,6 +48,7 @@ public class UtilServiceImpl implements UtilService {
                 break;
             case 2:
             case 3:
+            default:
                 DictCollegeNew data = dictCollegeNewMapper.selectByName(dictCollegeNew.getName());
                 if (Objects.nonNull(data)){
                     dictCollegeNew=data;
@@ -58,6 +59,7 @@ public class UtilServiceImpl implements UtilService {
                 dictCollegeTypeRelation.setTypeid(type);
                 dictCollegeTypeRelationMapper.insert(dictCollegeTypeRelation);
                 break;
+
         }
     }
 }
