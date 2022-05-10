@@ -5,11 +5,11 @@ spring:
     name: MyBlog
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/dictdb?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2b8&allowMultiQueries=true
+    url: jdbc:mysql://localhost:3306/blogdb?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2b8&allowMultiQueries=true
     username: root
     password: 123456
   redis:
-    host: 192.168.172.129
+    host: 127.0.0.1
     port: 6379
     timeout: 30000ms
     database: 15

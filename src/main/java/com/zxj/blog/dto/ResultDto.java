@@ -22,6 +22,9 @@ public class ResultDto<T> {
     public static <T> ResultDto<T> succ(T data,String message){
         return new ResultDto<>(CODE_SUCC,message,data);
     }
+    public static <T> ResultDto<T> succ(Integer code,String message,T data){
+        return new ResultDto<>(code,message,data);
+    }
 
     public static <T> ResultDto<T> fail (T data){
         return new ResultDto<>(CODE_FAIL,"操作失败",data);

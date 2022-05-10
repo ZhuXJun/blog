@@ -7,11 +7,13 @@ import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.client.indices.CreateIndexRequest;
 import org.elasticsearch.client.indices.CreateIndexResponse;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
-@Configuration
+@Component
 public class EsClient {
 
     @Value("${ES.host}")
@@ -20,35 +22,11 @@ public class EsClient {
     @Value("${ES.port}")
     private Integer port;
 
-    public static RestHighLevelClient restHighLevelClient;
+    private static RestHighLevelClient restHighLevelClient;
 
-    static {
-        //restHighLevelClient = new RestHighLevelClient(RestClient.builder(new HttpHost(esHost, port)));
-    }
-
-    public static CreateIndexResponse doCreateIndex(String index) throws IOException {
-        CreateIndexRequest createIndexRequest = new CreateIndexRequest(index);
-        CreateIndexResponse createIndexResponse =
-                restHighLevelClient.indices()
-                        .create(createIndexRequest, RequestOptions.DEFAULT);
-        return createIndexResponse;
-    }
-
-    public static void doCreateIndexMapping() {
-    }
-
-    public static void doAddProporeties() {
-    }
-
-    public static void doGetRequest() {
-    }
-
-    public static void doPostRquest() {
-    }
-
-    public static void doPutRequest() {
-    }
-
-    public static void doDeleteRequest() {
+    @Bean
+    public RestHighLevelClient getRestHighLevelClient() {
+        restHighLevelClient = new RestHighLevelClient(RestClient.builder(new HttpHost(esHost, port)));
+        return restHighLevelClient;
     }
 }

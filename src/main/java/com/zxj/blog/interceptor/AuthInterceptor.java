@@ -44,7 +44,7 @@ public class AuthInterceptor implements HandlerInterceptor {
             queryString = URLDecoder.decode(queryString, StandardCharsets.UTF_8.name());
             uri = uri + "?" + queryString;
         }
-        String body = JSONObject.toJSONString(request.getInputStream());
+        String body = StreamUtils.copyToString(request.getInputStream(), StandardCharsets.UTF_8);
         log.info("接收到请求：" + uri + "，body= >【" + body + "】");
         Method method = ((HandlerMethod) handler).getMethod();
         Token tokenAuth = method.getAnnotation(Token.class);

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalEexceptionHandler {
 
     private ResultDto<String> createResult(Integer code, String message) {
-        return new ResultDto<>(code, message, null);
+        return ResultDto.succ(code,message,null);
     }
 
     @ExceptionHandler(BaseException.class)
