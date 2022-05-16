@@ -2,6 +2,7 @@ package com.zxj.blog.es;
 
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zxj.blog.entity.User;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +17,7 @@ import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.xcontent.XContentType;
+import org.elasticsearch.index.get.GetResult;
 
 import java.io.IOException;
 import java.util.Date;
@@ -29,9 +31,19 @@ public class ESClientDocUpdate {
                 RestClient.builder(new HttpHost("localhost",9200))
         );
         GetRequest getRequest = new GetRequest();
-        getRequest.index("user").id("zxj-01");
+        getRequest.index("user_java").id("zxj-06");
         GetResponse documentFields = restHighLevelClient.get(getRequest, RequestOptions.DEFAULT);
-        log.info("查询成功=====> {}",documentFields.getField("nickname"));
-        log.info("查询成功=====> {}",documentFields);
+        User user = JSONObject.parseObject(documentFields.getSourceAsString(), User.class);
+        //UpdateRequest updateRequest = new UpdateRequest();
+        //updateRequest.index("user_java").id("zxj-06");
+        //user.setAvatar("不知道是什么意思更新后");
+        //updateRequest.doc(JSONObject.toJSONString(user),XContentType.JSON);
+        //UpdateResponse updateResponse = restHighLevelClient.update(updateRequest, RequestOptions.DEFAULT);
+        //System.out.println(updateResponse.getGetResult());
+        //局部更新
+        UpdateRequest request = new UpdateRequest();
+        request.index("user_java").id("zxj-06");
+        request.doc(XContentType.JSON,"role",2);
+        restHighLevelClient.update(request, RequestOptions.DEFAULT);
     }
 }
