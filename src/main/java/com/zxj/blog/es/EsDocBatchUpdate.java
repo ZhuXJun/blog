@@ -4,6 +4,7 @@ import com.zxj.blog.entity.User;
 import org.apache.http.HttpHost;
 import org.elasticsearch.action.bulk.BulkRequest;
 import org.elasticsearch.action.bulk.BulkResponse;
+import org.elasticsearch.action.delete.DeleteRequest;
 import org.elasticsearch.action.update.UpdateRequest;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestClient;
@@ -19,7 +20,11 @@ public class EsDocBatchUpdate {
         );
         BulkRequest bulkRequest = new BulkRequest();
         for (int i = 1006; i <1011 ; i++) {
-            UpdateRequest updateRequest = new UpdateRequest().index("user_java").id(String.valueOf(i)).doc(XContentType.JSON,"role",i--);
+            //批量更新
+            UpdateRequest updateRequest = new UpdateRequest().index("user_java").id(String.valueOf(i)).doc(XContentType.JSON,"role",i);
+            //批量删除
+            //DeleteRequest deleteRequest = new DeleteRequest().index("user_java").id(String.valueOf(i));
+            //bulkRequest.add(deleteRequest);
             bulkRequest.add(updateRequest);
         }
         BulkResponse bulk = restHighLevelClient.bulk(bulkRequest, RequestOptions.DEFAULT);

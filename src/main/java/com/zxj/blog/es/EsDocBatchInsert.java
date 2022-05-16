@@ -24,13 +24,15 @@ public class EsDocBatchInsert {
         BulkRequest bulkRequest = new BulkRequest();
         for (int i = 0; i < 5; i++) {
             User user = new User();
-            user.setId(Long.parseLong(1006+i+""));
-            user.setAvatar("循环" + (1006+i) + "号");
+            user.setNickname("如意"+ i );
+            user.setUsername("张三"+ i);
+            user.setId(Long.parseLong(1111+i+""));
+            user.setAvatar("循环" + (1111+i) + "号");
             user.setCreatetime(new Date());
             //创建对象
-            IndexRequest indexRequest = new IndexRequest().index("user_java").id(String.valueOf(1006+i))
+            IndexRequest indexRequest = new IndexRequest().index("user_java").id(String.valueOf(1111+i))
                     .source(JSONObject.toJSONString(user),XContentType.JSON)
-                    .create(false);
+                    .create(true);
             bulkRequest.add(indexRequest);
         }
         restHighLevelClient.bulk(bulkRequest, RequestOptions.DEFAULT);
