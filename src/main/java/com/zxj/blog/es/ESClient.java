@@ -29,24 +29,24 @@ public class ESClient {
         /**
          * 创建索引
          */
-        // CreateIndexResponse createIndexResponse = restHighLevelClient.indices()
-        //         .create(new CreateIndexRequest("user_java"), RequestOptions.DEFAULT);
-        // boolean acknowledged = createIndexResponse.isAcknowledged();
-        // log.info("创建索引===》 {} ",acknowledged);
+         //CreateIndexResponse createIndexResponse = restHighLevelClient.indices()
+         //        .create(new CreateIndexRequest("user_java"), RequestOptions.DEFAULT);
+         //boolean acknowledged = createIndexResponse.isAcknowledged();
+         //log.info("创建索引===》 {} ",acknowledged);
         /**
          * 查询索引
          */
-        // GetIndexRequest getIndexRequest = new GetIndexRequest("user_java");
-        // GetIndexResponse getIndexResponse = restHighLevelClient.indices().get(getIndexRequest, RequestOptions.DEFAULT);
-        // log.info("获取索引=1==》 {} ",getIndexResponse.getAliases());
-        // log.info("获取索引=2==》 {} ",getIndexResponse.getMappings());
-        // log.info("获取索引=3==》 {} ",getIndexResponse.getSettings());
+         //GetIndexRequest getIndexRequest = new GetIndexRequest("shopping");
+         //GetIndexResponse getIndexResponse = restHighLevelClient.indices().get(getIndexRequest, RequestOptions.DEFAULT);
+         //log.info("获取索引=1==》 {} ",getIndexResponse.getAliases());
+         //log.info("获取索引=2==》 {} ",getIndexResponse.getMappings());
+         //log.info("获取索引=3==》 {} ",getIndexResponse.getSettings());
         /**
          * 删除索引
          */
-        // DeleteIndexRequest deleteIndexRequest = new DeleteIndexRequest("user_java");
-        // AcknowledgedResponse deleteIndex = restHighLevelClient.indices().delete(deleteIndexRequest, RequestOptions.DEFAULT);
-        // log.info("删除索引==={} ",deleteIndex.isAcknowledged());
+         //DeleteIndexRequest deleteIndexRequest = new DeleteIndexRequest("javatest");
+         //AcknowledgedResponse deleteIndex = restHighLevelClient.indices().delete(deleteIndexRequest, RequestOptions.DEFAULT);
+         //log.info("删除索引==={} ",deleteIndex.isAcknowledged());
 
         // 闭es客户端
         restHighLevelClient.close();

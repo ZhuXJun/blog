@@ -28,7 +28,7 @@ public class UtilServiceImpl implements UtilService {
 
     @Override
     public Boolean doRead(String fileName,Integer type) {
-        String file = path+fileName+".xls";
+        String file = path+fileName+".xlsx";
         EasyExcel.read(file, DictCollegeNew.class,new PageReadListener<DictCollegeNew>(dataList -> {
             for (DictCollegeNew dictCollegeNew : dataList) {
                this.doInsert(dictCollegeNew,type);

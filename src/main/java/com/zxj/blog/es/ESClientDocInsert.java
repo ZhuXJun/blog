@@ -25,7 +25,7 @@ public class ESClientDocInsert {
         );
 
         IndexRequest indexRequest = new IndexRequest();
-        indexRequest.index("user").id("zxj-01");
+        indexRequest.index("user_java").id("zxj-06");
         User user = new User();
         user.setId(1L);
         user.setUsername("朱相俊");
@@ -36,12 +36,10 @@ public class ESClientDocInsert {
         user.setPassword("1234qwer");
         user.setCreatetime(new Date());
         user.setUpdatetime(new Date());
-        ObjectMapper mapper = new ObjectMapper();
-        String writeValueAsString = mapper.writeValueAsString(user);
-        log.info("User . Json String ====== > {}",writeValueAsString);
-        indexRequest.source(writeValueAsString, XContentType.JSON);
+        indexRequest.source(JSONObject.toJSONString(user), XContentType.JSON);
         IndexResponse indexResponse = restHighLevelClient.index(indexRequest, RequestOptions.DEFAULT);
-        log.info("新增成功=====> {}",indexResponse.getResult());
-        log.info("新增成功=====> {}",JSONObject.toJSONString(indexResponse));
+        System.out.println();
+        log.info("indexResponse.getResult() {}",indexResponse);
+        restHighLevelClient.close();
     }
 }

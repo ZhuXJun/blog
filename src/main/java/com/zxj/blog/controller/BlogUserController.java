@@ -1,10 +1,8 @@
 package com.zxj.blog.controller;
 
-import com.zxj.blog.annotation.SaveLog;
 import com.zxj.blog.annotation.Token;
 import com.zxj.blog.dto.ResultDto;
 import com.zxj.blog.entity.User;
-import com.zxj.blog.es.EsBatchOperation;
 import com.zxj.blog.service.BlogUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -48,14 +46,4 @@ public class BlogUserController {
             return ResultDto.fail(false);
         }
     }
-
-    @Autowired
-    private EsBatchOperation esBatchOperation;
-    @PostMapping("test/es")
-    public ResultDto<Boolean> esTest() throws IOException {
-        esBatchOperation.batchInster(new ArrayList<>());
-        return ResultDto.succ(true);
-    }
-
-    
 }
