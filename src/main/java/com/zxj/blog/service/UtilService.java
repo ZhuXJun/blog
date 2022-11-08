@@ -4,4 +4,6 @@ public interface UtilService {
 
 
     Boolean doRead(String fileName,Integer type);
+
+    Boolean doGenerator(Integer times);
 }

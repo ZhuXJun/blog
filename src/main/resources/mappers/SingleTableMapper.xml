@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zxj.blog.dao.zxjdb.SingleTableMapper">
+  <resultMap id="BaseResultMap" type="com.zxj.blog.entity.zxjdb.SingleTable">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="key1" jdbcType="VARCHAR" property="key1" />
+    <result column="key2" jdbcType="INTEGER" property="key2" />
+    <result column="key3" jdbcType="VARCHAR" property="key3" />
+    <result column="key_part1" jdbcType="VARCHAR" property="keyPart1" />
+    <result column="key_part2" jdbcType="VARCHAR" property="keyPart2" />
+    <result column="key_part3" jdbcType="VARCHAR" property="keyPart3" />
+    <result column="common_field" jdbcType="VARCHAR" property="commonField" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, key1, key2, key3, key_part1, key_part2, key_part3, common_field
+  </sql>
+  <select id="selectByExample" parameterType="com.zxj.blog.entity.zxjdb.SingleTableExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from single_table
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from single_table
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from single_table
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zxj.blog.entity.zxjdb.SingleTableExample">
+    delete from single_table
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zxj.blog.entity.zxjdb.SingleTable">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into single_table (key1, key2, key3, 
+      key_part1, key_part2, key_part3, 
+      common_field)
+    values (#{key1,jdbcType=VARCHAR}, #{key2,jdbcType=INTEGER}, #{key3,jdbcType=VARCHAR}, 
+      #{keyPart1,jdbcType=VARCHAR}, #{keyPart2,jdbcType=VARCHAR}, #{keyPart3,jdbcType=VARCHAR}, 
+      #{commonField,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zxj.blog.entity.zxjdb.SingleTable">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into single_table
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="key1 != null">
+        key1,
+      </if>
+      <if test="key2 != null">
+        key2,
+      </if>
+      <if test="key3 != null">
+        key3,
+      </if>
+      <if test="keyPart1 != null">
+        key_part1,
+      </if>
+      <if test="keyPart2 != null">
+        key_part2,
+      </if>
+      <if test="keyPart3 != null">
+        key_part3,
+      </if>
+      <if test="commonField != null">
+        common_field,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="key1 != null">
+        #{key1,jdbcType=VARCHAR},
+      </if>
+      <if test="key2 != null">
+        #{key2,jdbcType=INTEGER},
+      </if>
+      <if test="key3 != null">
+        #{key3,jdbcType=VARCHAR},
+      </if>
+      <if test="keyPart1 != null">
+        #{keyPart1,jdbcType=VARCHAR},
+      </if>
+      <if test="keyPart2 != null">
+        #{keyPart2,jdbcType=VARCHAR},
+      </if>
+      <if test="keyPart3 != null">
+        #{keyPart3,jdbcType=VARCHAR},
+      </if>
+      <if test="commonField != null">
+        #{commonField,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zxj.blog.entity.zxjdb.SingleTableExample" resultType="java.lang.Long">
+    select count(*) from single_table
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update single_table
+    <set>
+      <if test="row.id != null">
+        id = #{row.id,jdbcType=INTEGER},
+      </if>
+      <if test="row.key1 != null">
+        key1 = #{row.key1,jdbcType=VARCHAR},
+      </if>
+      <if test="row.key2 != null">
+        key2 = #{row.key2,jdbcType=INTEGER},
+      </if>
+      <if test="row.key3 != null">
+        key3 = #{row.key3,jdbcType=VARCHAR},
+      </if>
+      <if test="row.keyPart1 != null">
+        key_part1 = #{row.keyPart1,jdbcType=VARCHAR},
+      </if>
+      <if test="row.keyPart2 != null">
+        key_part2 = #{row.keyPart2,jdbcType=VARCHAR},
+      </if>
+      <if test="row.keyPart3 != null">
+        key_part3 = #{row.keyPart3,jdbcType=VARCHAR},
+      </if>
+      <if test="row.commonField != null">
+        common_field = #{row.commonField,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update single_table
+    set id = #{row.id,jdbcType=INTEGER},
+      key1 = #{row.key1,jdbcType=VARCHAR},
+      key2 = #{row.key2,jdbcType=INTEGER},
+      key3 = #{row.key3,jdbcType=VARCHAR},
+      key_part1 = #{row.keyPart1,jdbcType=VARCHAR},
+      key_part2 = #{row.keyPart2,jdbcType=VARCHAR},
+      key_part3 = #{row.keyPart3,jdbcType=VARCHAR},
+      common_field = #{row.commonField,jdbcType=VARCHAR}
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zxj.blog.entity.zxjdb.SingleTable">
+    update single_table
+    <set>
+      <if test="key1 != null">
+        key1 = #{key1,jdbcType=VARCHAR},
+      </if>
+      <if test="key2 != null">
+        key2 = #{key2,jdbcType=INTEGER},
+      </if>
+      <if test="key3 != null">
+        key3 = #{key3,jdbcType=VARCHAR},
+      </if>
+      <if test="keyPart1 != null">
+        key_part1 = #{keyPart1,jdbcType=VARCHAR},
+      </if>
+      <if test="keyPart2 != null">
+        key_part2 = #{keyPart2,jdbcType=VARCHAR},
+      </if>
+      <if test="keyPart3 != null">
+        key_part3 = #{keyPart3,jdbcType=VARCHAR},
+      </if>
+      <if test="commonField != null">
+        common_field = #{commonField,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zxj.blog.entity.zxjdb.SingleTable">
+    update single_table
+    set key1 = #{key1,jdbcType=VARCHAR},
+      key2 = #{key2,jdbcType=INTEGER},
+      key3 = #{key3,jdbcType=VARCHAR},
+      key_part1 = #{keyPart1,jdbcType=VARCHAR},
+      key_part2 = #{keyPart2,jdbcType=VARCHAR},
+      key_part3 = #{keyPart3,jdbcType=VARCHAR},
+      common_field = #{commonField,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
