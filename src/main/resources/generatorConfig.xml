@@ -39,7 +39,7 @@
         </javaTypeResolver>
 
         <!-- Entity Java Class -->
-        <javaModelGenerator targetPackage="com.moseeker.entity.index_demo" targetProject="./src/main/java">
+        <javaModelGenerator targetPackage="com.zxj.blog.entity.文件夹名" targetProject="./src/main/java">
             <property name="enableSubPackages" value="false"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
@@ -49,7 +49,7 @@
             <property name="enableSubPackages" value="false"/>
         </sqlMapGenerator>
         <!-- DAO的包名和位置-->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.moseeker.mapper.demodb" targetProject="src/main/java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.zxj.blog.mapper.文件夹名" targetProject="src/main/java">
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
 
