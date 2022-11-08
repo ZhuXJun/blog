@@ -85,7 +85,7 @@ public class RandomUtil {
      * @param type   随机字符类型。1、数字；2、大写字符；3、小写字符；其他：包含以上三种类型
      * @return
      */
-    private static String getRandomString(Integer length, Integer type) {
+    public static String getRandomString(Integer length, Integer type) {
         StringBuffer randomCode = new StringBuffer();
 
         for (int i = 0; i < length; i++) {
@@ -113,7 +113,7 @@ public class RandomUtil {
      *
      * @return
      */
-    private static String getRandomChar() {
+    public static String getRandomChar() {
         int index = (int) Math.round(Math.random() * 2);
         switch (index) {
             case 0:// 大写字符
@@ -130,7 +130,7 @@ public class RandomUtil {
      *
      * @return
      */
-    private static String getRandomUpperCase() {
+    public static String getRandomUpperCase() {
         return String.valueOf((char) Math.round(Math.random() * 25 + 65));
     }
 
@@ -139,7 +139,7 @@ public class RandomUtil {
      *
      * @return
      */
-    private static String getRandomLowerCase() {
+    public static String getRandomLowerCase() {
         return String.valueOf((char) Math.round(Math.random() * 25 + 97));
     }
 
@@ -148,8 +148,8 @@ public class RandomUtil {
      *
      * @return
      */
-    private static String getRandomInteger() {
-        return String.valueOf(Math.round(Math.random() * 9));
+    public static String getRandomInteger() {
+        return String.valueOf(Math.round(Math.random() * 100000));
     }
 
 }
